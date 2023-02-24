@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import "./expenseForm.css";
 
-const ExpenseForm = ({ expenses, setExpenses}) => {
+const ExpenseForm = ({ setExpenses }) => {
   const [userInput, setUserInput] = useState({
     enteredTitle: "",
     enteredAmount: "",
@@ -26,14 +26,19 @@ const ExpenseForm = ({ expenses, setExpenses}) => {
   };
   const submitHandler = (event) => {
     event.preventDefault();
-    const expenseData = [{
+    const expenseData = {
       title: userInput.enteredTitle,
       amount: +userInput.enteredAmount,
       date: new Date(userInput.enteredDate),
-      id: Math.random().toString() + userInput.enteredTitle + userInput.enteredAmount + userInput.enteredDate
-    }];
-    const newExpenses = expenses.concat(expenseData);
-    setExpenses(newExpenses);
+      id:
+        Math.random().toString() +
+        userInput.enteredTitle +
+        userInput.enteredAmount +
+        userInput.enteredDate,
+    };
+    setExpenses((prevExpenses) => {
+      return [expenseData, ...prevExpenses];
+    });
     setUserInput({
       enteredTitle: "",
       enteredAmount: "",
@@ -82,6 +87,5 @@ const ExpenseForm = ({ expenses, setExpenses}) => {
 export default ExpenseForm;
 
 ExpenseForm.propTypes = {
-    expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
-    setExpenses: PropTypes.func.isRequired
-}
+  setExpenses: PropTypes.func.isRequired,
+};
