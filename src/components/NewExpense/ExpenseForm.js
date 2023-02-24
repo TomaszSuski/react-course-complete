@@ -2,11 +2,7 @@ import React, { useState } from "react";
 import PropTypes from 'prop-types';
 import "./expenseForm.css";
 
-const ExpenseForm = ({ onSaveExpense }) => {
-  // const [enteredTitle, setEnteredTitle] = useState('');
-  // const [enteredAmount, setEnteredAmount] = useState('');
-  // const [enteredDate, setEnteredDate] = useState('');
-
+const ExpenseForm = ({ expenses, setExpenses}) => {
   const [userInput, setUserInput] = useState({
     enteredTitle: "",
     enteredAmount: "",
@@ -14,19 +10,11 @@ const ExpenseForm = ({ onSaveExpense }) => {
   });
 
   const titleChangeHandler = (event) => {
-    // setEnteredTitle(event.target.value);
-    // setUserInput({
-    //     ...userInput,
-    //     enteredTitle: event.target.value
-    // });
-
     setUserInput((prevState) => {
       return { ...prevState, enteredTitle: event.target.value };
     });
   };
   const amountChangeHandler = (event) => {
-    // setEnteredAmount(event.target.value);
-
     setUserInput((prevState) => {
       return { ...prevState, enteredAmount: event.target.value };
     });
@@ -38,12 +26,14 @@ const ExpenseForm = ({ onSaveExpense }) => {
   };
   const submitHandler = (event) => {
     event.preventDefault();
-    const expenseData = {
+    const expenseData = [{
       title: userInput.enteredTitle,
-      amount: userInput.enteredAmount,
+      amount: +userInput.enteredAmount,
       date: new Date(userInput.enteredDate),
-    };
-    onSaveExpense(expenseData);
+      id: Math.random().toString() + userInput.enteredTitle + userInput.enteredAmount + userInput.enteredDate
+    }];
+    const newExpenses = expenses.concat(expenseData);
+    setExpenses(newExpenses);
     setUserInput({
       enteredTitle: "",
       enteredAmount: "",
@@ -92,5 +82,6 @@ const ExpenseForm = ({ onSaveExpense }) => {
 export default ExpenseForm;
 
 ExpenseForm.propTypes = {
-    onSaveExpense: PropTypes.func.isRequired
+    expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+    setExpenses: PropTypes.func.isRequired
 }

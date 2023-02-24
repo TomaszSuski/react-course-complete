@@ -3,17 +3,10 @@ import ExpenseForm from "./ExpenseForm";
 import PropTypes from 'prop-types';
 import './newExpense.css';
 
-const NewExpense = ({ addNewExpense }) => {
-    const saveExpenseHandler = (enteredExpense) => {
-        const expense = {
-            ...enteredExpense,
-            id: Math.random().toString() + enteredExpense.title + enteredExpense.amount + enteredExpense.date
-        };
-        addNewExpense(expense);
-    }
+const NewExpense = ({ expenses, setExpenses }) => {
     return (
         <div className="new-expense">
-            <ExpenseForm onSaveExpense={saveExpenseHandler} />
+            <ExpenseForm expenses={expenses} setExpenses={setExpenses} />
         </div>
     );
 }
@@ -21,5 +14,6 @@ const NewExpense = ({ addNewExpense }) => {
 export default NewExpense;
 
 NewExpense.propTypes = {
-    addNewExpense: PropTypes.func.isRequired
+    expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+    setExpenses: PropTypes.func.isRequired
 }
