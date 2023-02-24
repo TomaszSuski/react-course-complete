@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import PropTypes from 'prop-types';
 import "./expenseForm.css";
 
-const ExpenseForm = () => {
+const ExpenseForm = ({ onSaveExpense }) => {
   // const [enteredTitle, setEnteredTitle] = useState('');
   // const [enteredAmount, setEnteredAmount] = useState('');
   // const [enteredDate, setEnteredDate] = useState('');
@@ -42,7 +43,7 @@ const ExpenseForm = () => {
       amount: userInput.enteredAmount,
       date: new Date(userInput.enteredDate),
     };
-    console.log(expenseData);
+    onSaveExpense(expenseData);
     setUserInput({
       enteredTitle: "",
       enteredAmount: "",
@@ -89,3 +90,7 @@ const ExpenseForm = () => {
 };
 
 export default ExpenseForm;
+
+ExpenseForm.propTypes = {
+    onSaveExpense: PropTypes.func.isRequired
+}
