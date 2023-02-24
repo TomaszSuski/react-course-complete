@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import ExpenseItem from "./ExpenseItem";
 import "./expenses.css";
-import Card from "./Card";
+import Card from "../UI/Card";
 
 export default function Expenses({ expenses }) {
   return (
