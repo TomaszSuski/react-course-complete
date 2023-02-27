@@ -4,6 +4,7 @@ import ExpensesList from "./ExpensesList";
 import "./expenses.css";
 import Card from "../UI/Card";
 import ExpensesFilter from "./ExpensesFilter";
+import ExpensesChart from "./ExpensesChart";
 
 export default function Expenses({ expenses }) {
   const [selectedYear, setSelectedYear] = useState("");
@@ -17,6 +18,7 @@ export default function Expenses({ expenses }) {
         selectedYear={selectedYear}
         setSelectedYear={setSelectedYear}
       />
+      <ExpensesChart filteredList={filteredList} year={selectedYear} />
       <ExpensesList
         expenses={expenses}
         filteredList={filteredList}
