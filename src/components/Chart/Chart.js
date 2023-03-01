@@ -11,7 +11,6 @@ export default function Chart({ dataPoints }) {
       {dataPoints.map((dataPoint) => (
         <ChartBar
           key={dataPoint.label}
-          chartBarKey={dataPoint.label}
           value={dataPoint.value}
           maxValue={totalMaximum}
           label={dataPoint.label}
